@@ -4,6 +4,7 @@ import {darkTheme, lightTheme} from '../Components/Templates/PSTheme';
 class SingleTonObject {
   static instance: SingleTonObject | undefined;
   token?: string;
+  _user?: any;
 
   static getInstance() {
     if (!this.instance) {
@@ -19,6 +20,14 @@ class SingleTonObject {
   getToken() {
     return this.token;
   }
+
+  setUser(user: any) {
+    this._user = user;
+  }
+
+  getUser() {
+    return this._user;
+  }
 }
 
 // Helper Methods for Get and set token
@@ -32,4 +41,12 @@ export function getToken(): string | undefined {
 
 export function setToken(token: string) {
   SingleTonObject.getInstance().setToken(token);
+}
+
+export function getCurrentUser(): any {
+  return SingleTonObject.getInstance().getUser();
+}
+
+export function setCurrentUser(user: any) {
+  SingleTonObject.getInstance().setUser(user);
 }

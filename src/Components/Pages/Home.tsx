@@ -14,7 +14,9 @@ import Modal from 'react-native-modal';
 import {PSColors} from '../../Utility/PSColors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
-import {getToken} from '../../Utility/Utility';
+import { getToken } from '../../Utility/Utility';
+
+
 const arr = [];
 
 interface StoryWeight {
@@ -119,6 +121,13 @@ function Home(props: any) {
 
   return (
     <View style={[styles.container]}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => navigation.push('ContactScreen')}>
+        <View style={[styles.container, styles.block]}>
+          <Text>Contact</Text>
+        </View>
+      </TouchableOpacity>
       <FlatList
         data={stories}
         renderItem={({item}) => (

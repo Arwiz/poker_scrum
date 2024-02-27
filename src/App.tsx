@@ -4,16 +4,25 @@
  *
  * @format
  */
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
 
 import React from 'react';
 import NavigationStack from './Navigation/Navigation';
 import {PSThemeProvider} from './Components/Templates/PSTheme';
+import {AuthProvider} from './Components/contexts/AuthContext';
+import {SocketProvider} from './Components/contexts/SocketContext';
 
 function App(): JSX.Element {
   return (
-    <PSThemeProvider>
-      <NavigationStack />
-    </PSThemeProvider>
+    <AuthProvider>
+      <PSThemeProvider>
+        <SocketProvider>
+          <NavigationStack />
+        </SocketProvider>
+      </PSThemeProvider>
+    </AuthProvider>
   );
 }
 

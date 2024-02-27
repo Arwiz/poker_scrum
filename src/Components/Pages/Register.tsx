@@ -21,7 +21,7 @@ import {PSText24} from '../atom/PSText';
 import {PSButtonGeneral} from '../atom/PSButton';
 import Box from '../atom/Box';
 import {PSColors} from '../../Utility/PSColors';
-import SocketIOClient from 'socket.io-client';
+import SocketIOClient, { Socket } from 'socket.io-client';
 import axios from 'axios';
 import {getToken} from '../../Utility/Utility';
 
@@ -31,17 +31,32 @@ export interface User {
   password: string;
 }
 
+// export class SocketHandler {
+//   static get_instance(token?: string | null): Socket | undefined {
+//     let socket;
+//     if (token) {
+//       if (!socket && token) {
+//         socket = SocketIOClient('http://localhost:3000', {query: {token}});
+//       }
+//       return socket;
+//     }
+//     return undefined;
+//   }
+// }
+
 export class SocketHandler {
-  static get_instance() {
-    let socket;
-    const token = getToken();
-    if (token) {
-      if (!socket && token) {
-        socket = SocketIOClient('http://localhost:3000', {query: {token}});
-      }
-      return socket;
+  static get_instance(token?: string | null): Socket | undefined {
+    if (!token) {
+      return undefined;
     }
-    return undefined;
+
+    let socket: Socket | undefined;
+
+    if (!socket) {
+      socket = SocketIOClient('http://localhost:3000', { query: { token } });
+    }
+
+    return socket;
   }
 }
 
